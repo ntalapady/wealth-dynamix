@@ -1,0 +1,45 @@
+# === Terraform ===
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Ignore Terraform variable files containing secrets
+*.tfvars
+*.tfvars.json
+
+# Override files (ignored by default, can be used for local configs)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Lock file (optional, can be included if you want to pin provider versions)
+.terraform.lock.hcl
+
+# === Visual Studio Code ===
+.vscode/
+
+# === OS-specific files ===
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# === Logs ===
+*.log
+
+# === Python virtual env (if any Python scripts are used) ===
+venv/
+__pycache__/
+
+# === Node.js dependencies (if using Node.js tooling) ===
+node_modules/
