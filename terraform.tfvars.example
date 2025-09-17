@@ -1,0 +1,9 @@
+organization = "acme"
+clients = ["clientA","clientB"]
+environments = ["dev","test","staging","prod"]
+location = "uksouth"
+
+default_tags = {
+  Project = "OnboardClients"
+  Team    = "Platform"
+}
