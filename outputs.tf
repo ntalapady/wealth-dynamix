@@ -1,13 +1,17 @@
+###############################################
+# Root Outputs
+###############################################
+
 output "storage_accounts" {
-  description = "Map of created storage accounts keyed by client-env"
+  description = "Map of created storage accounts keyed by client-environment pair."
+
   value = {
-    for k, m in module.storage_accounts :
-    k => {
-      name               = m.storage_account_name
-      resource_group     = m.resource_group_name
-      id                 = m.storage_account_id
-      primary_blob_endpoint = m.primary_blob_endpoint
+    for key, module in module.storage_accounts :
+    key => {
+      name               = module.storage_account_name
+      resource_group     = module.resource_group_name
+      id                 = module.storage_account_id
+      primary_blob_url   = module.primary_blob_endpoint
     }
   }
-  sensitive = false
 }

@@ -1,17 +1,34 @@
+###############################################
+# Locals for Derived Values
+###############################################
+
 locals {
-  # normalize client and env names (lowercase)
+  # Normalize input values
   clients_normalized = [for c in var.clients : lower(trim(c))]
   envs_normalized    = [for e in var.environments : lower(trim(e))]
 
-  # build a flat map keyed by "<client>-<env>" so we can for_each
-  client_env_pairs = {
+  # Create a nested map: each client maps to a list of environments
+  client_env_map = {
     for client in local.clients_normalized :
     client => {
-      environments = local.envs_normalized
+      envs = local.envs_normalized
     }
   }
 
-  # optional: global naming constraints
+  # Flatten into a single map keyed by "<client>-<env>"
+  # Example: "clienta-dev", "clientb-prod", etc.
+  client_env_flat = merge([
+    for c, v in local.client_env_map :
+    {
+      for e in v.envs :
+      "${c}-${e}" => {
+        client      = c
+        environment = e
+      }
+    }
+  ]...)
+
+  # Storage account name constraints
   sa_name_max_length = 24
-  sa_base_max_len     = 20  # we'll append 4 hex chars
+  sa_base_max_length = 20 # Reserve 4 chars for random suffix
 }

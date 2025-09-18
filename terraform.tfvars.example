@@ -1,9 +1,27 @@
 organization = "acme"
-clients = ["clientA","clientB"]
-environments = ["dev","test","staging","prod"]
+
+clients = [
+  "clientA",
+  "clientB"
+]
+
+environments = [
+  "dev",
+  "test",
+  "staging",
+  "prod"
+]
+
 location = "uksouth"
 
 default_tags = {
   Project = "OnboardClients"
   Team    = "Platform"
+}
+
+env_storage_sku = {
+  dev     = "Standard_LRS"
+  test    = "Standard_LRS"
+  staging = "Standard_GRS"
+  prod    = "Standard_GRS"
 }
